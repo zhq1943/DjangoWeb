@@ -18,19 +18,28 @@ class NewVisitorTest(unittest.TestCase):
 
         #she notices the page title and header mention to-do lists
         self.assertIn( 'To-Do', self.browser.title)
-        self.fail('Finish the test!')
-
+        header_text=self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('To-Do',header_text)
         #she is invited to enter a to-do tiem straight away
-
+        inputbox = self.broswer.find_element_by_id('id_new_item')
+        self.assertEqual(inputbox.get_attribute('placeholder'),'Enter a to-do item')
         #she type "Buy peacock feathers" into a text box (Edith's hobby
         #is tying fly-fishing lures)
+        inputbox.send_keys('Buy peacock feathers')
 
         #When she hits enter, the page updates , and now the page lists
         #"1:Buy peacock feathers" as an ite in a to-do list
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(3)
 
+        table=self.browser.find_element_by_id('id_list_table')
+
+        rows=table.dind_elements_by_tag_name('tr')
+        self.assertTrue(any(row.text=='1: Buy peacock feathers' for row in rows))
         #There is still a text box inviting her to add another item. She
         #enters "Use peacock faethers to make a fly" (Edith is very methodical)
 
+        self.fail('Finish the test!')
         #The page updates anain, and now both items on her list
 
         #Edith wonders whether the site will remember her list. Then she sees
