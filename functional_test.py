@@ -36,7 +36,7 @@ class NewVisitorTest(unittest.TestCase):
         #When she hits enter, the page updates , and now the page lists
         #"1:Buy peacock feathers" as an ite in a to-do list
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(3)
 
         #table=self.browser.find_element_by_id('id_list_table')
 
@@ -49,11 +49,11 @@ class NewVisitorTest(unittest.TestCase):
         inputbox=self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('Use peacock feathers to make a fly')
         inputbox.send_keys(Keys.ENTER)
-        time.sleep(1)
+        time.sleep(3)
         #The page updates anain, and now both items on her list
 
         self.check_for_row_in_list_table('1:Buy peacock feathers')
-        self.chekc_for_row_in_list_table('2:Use peacock feathers to make a fly')
+        self.check_for_row_in_list_table('2:Use peacock feathers to make a fly')
         #Edith wonders whether the site will remember her list. Then she sees
         #that the site has genrated a unique URL for her --there is some 
         #explanatory text to the effect
@@ -61,5 +61,6 @@ class NewVisitorTest(unittest.TestCase):
         #She visite that URL - her to-do list is still there
 
         #Satisfied , she goes back to sleep
+        self.fail('Finish the test!')
 if __name__=='__main__':
     unittest.main(warnings='ignore')
